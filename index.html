@@ -20,8 +20,8 @@ body{overflow:hidden}
 .l{left:3.4cqw}.r{right:3.4cqw}
 </style></head><body>
 <div class="stage">
-  <div class="panel" id="ph"><div class="half top t"><div class="num"></div></div><div class="half bot b"><div class="num"></div></div><div class="half top flap ft"><div class="num"></div></div><div class="half bot flap fb"><div class="num"></div></div></div>
-  <div class="panel" id="pm"><div class="half top t"><div class="num"></div></div><div class="half bot b"><div class="num"></div></div><div class="half top flap ft"><div class="num"></div></div><div class="half bot flap fb"><div class="num"></div></div><div class="small r" id="day"></div></div>
+  <div class="panel" id="ph"><div class="half top t"><div class="num">00</div></div><div class="half bot b"><div class="num">00</div></div><div class="half top flap ft"><div class="num">00</div></div><div class="half bot flap fb"><div class="num">00</div></div></div>
+  <div class="panel" id="pm"><div class="half top t"><div class="num">00</div></div><div class="half bot b"><div class="num">00</div></div><div class="half top flap ft"><div class="num">00</div></div><div class="half bot flap fb"><div class="num">00</div></div><div class="small r" id="day"></div></div>
 </div>
 <script>
 (function(){
@@ -37,4 +37,15 @@ body{overflow:hidden}
     q(p,".t").textContent=v;q(p,".ft").textContent=old;q(p,".fb").textContent=v;
     ft.style.display=fb.style.display="block";
     ft.animate([{transform:"rotateX(0)"},{transform:"rotateX(-90deg)"}],{duration:300,easing:"ease-in",fill:"forwards"});
-    fb.animate([{transform:"rotateX(90deg)"},{transform:"rotateX(0)"}],{duration:300,delay:3
+    fb.animate([{transform:"rotateX(90deg)"},{transform:"rotateX(0)"}],{duration:300,delay:300,easing:"ease-out",fill:"both"});
+    setTimeout(function(){q(p,".b").textContent=v;ft.style.display=fb.style.display="none";},620);
+  };
+  var H=new Panel("ph"),M=new Panel("pm");
+  function tick(){
+    var d=new Date(),h=d.getHours();
+    H.set(pad(h));M.set(pad(d.getMinutes()));
+    document.getElementById("day").textContent=d.toLocaleDateString("fr-FR",{weekday:"long"}).toUpperCase();
+  }
+  tick();setInterval(tick,1000);
+})();
+</script></body></html>
