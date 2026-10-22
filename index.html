@@ -4,19 +4,19 @@
 <title>Horloge flip</title>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap" rel="stylesheet">
 <style>
-:root{--card:#2b2b2b;--card2:#262626;--line:#0f0f0f;--num:#f4f4f4;--small:#c9c9c9;color-scheme:dark}
+:root{--card:#2b2b2b;--card2:#262626;--line:#0f0f0f;--num:#f4f4f4;--small:#ffffff;color-scheme:dark}
 html,body{height:100%;margin:0;background:transparent}
-body{display:flex;align-items:center;justify-content:center;overflow:hidden;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0);box-sizing:border-box}
-.stage{width:min(100vw,calc(100vh*1.36));aspect-ratio:1.36/1;container-type:inline-size;display:flex;gap:1.6cqw}
+body{overflow:hidden}
+.stage{width:100vw;height:100vh;container-type:size;display:flex;gap:1.6cqw}
 .panel{position:relative;flex:1;perspective:140cqw;font-family:Oswald,"Arial Narrow",Arial,sans-serif;font-weight:600}
 .half{position:absolute;left:0;right:0;height:50%;overflow:hidden;background:var(--card);backface-visibility:hidden}
 .top{top:0;border-radius:2.2cqw 2.2cqw 0 0;transform-origin:bottom}
 .bot{top:50%;border-radius:0 0 2.2cqw 2.2cqw;background:var(--card2);transform-origin:top}
-.num{position:absolute;left:0;right:0;height:200%;display:flex;align-items:center;justify-content:center;font-size:40cqw;line-height:1;color:var(--num)}
+.num{position:absolute;left:0;right:0;height:200%;display:flex;align-items:center;justify-content:center;font-size:min(40cqw,54cqh);line-height:1;color:var(--num)}
 .top .num{top:0}.bot .num{top:-100%}
 .flap{display:none;z-index:2}
 .panel::after{content:"";position:absolute;left:0;right:0;top:calc(50% - .25cqw);height:.5cqw;background:var(--line);z-index:5}
-.small{position:absolute;bottom:3cqw;font-size:3.4cqw;letter-spacing:.06em;color:var(--small);z-index:6;font-family:Arial,Helvetica,sans-serif;font-weight:700}
+.small{position:absolute;bottom:min(3cqw,4cqh);font-size:min(4.6cqw,6.4cqh);letter-spacing:.08em;color:var(--small);z-index:6;font-family:Arial,Helvetica,sans-serif;font-weight:900}
 .l{left:3.4cqw}.r{right:3.4cqw}
 </style></head><body>
 <div class="stage">
@@ -37,15 +37,4 @@ body{display:flex;align-items:center;justify-content:center;overflow:hidden;padd
     q(p,".t").textContent=v;q(p,".ft").textContent=old;q(p,".fb").textContent=v;
     ft.style.display=fb.style.display="block";
     ft.animate([{transform:"rotateX(0)"},{transform:"rotateX(-90deg)"}],{duration:300,easing:"ease-in",fill:"forwards"});
-    fb.animate([{transform:"rotateX(90deg)"},{transform:"rotateX(0)"}],{duration:300,delay:300,easing:"ease-out",fill:"both"});
-    setTimeout(function(){q(p,".b").textContent=v;ft.style.display=fb.style.display="none";},620);
-  };
-  var H=new Panel("ph"),M=new Panel("pm");
-  function tick(){
-    var d=new Date(),h=d.getHours();
-    H.set(pad(h));M.set(pad(d.getMinutes()));
-    document.getElementById("day").textContent=d.toLocaleDateString("fr-FR",{weekday:"long"}).toUpperCase();
-  }
-  tick();setInterval(tick,1000);
-})();
-</script></body></html>
+    fb.animate([{transform:"rotateX(90deg)"},{transform:"rotateX(0)"}],{duration:300,delay:3
